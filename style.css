@@ -1,0 +1,37 @@
+:root{
+    
+    --primary-bg:rgba(18, 92, 145, 0.349);
+    --primary-color:rgba(34, 34, 34, 0.918);
+}
+body{
+    margin:0;
+    padding: 0;
+    background-color: var(--primary-bg);
+}
+#title{
+    color:var(--primary-color);
+    
+    
+    text-align: center;
+        
+}
+.inputArea{
+    
+    display: flex;
+
+}
+.inputArea *{
+    margin:8px
+}
+.inputArea label{
+    font-size: 20px;
+}
+.inputArea input{
+    align-items: center;
+    justify-content: center;
+    
+    text-size-adjust: 50px;
+}
+.listOfTask{
+    font-size: 20px;
+}
