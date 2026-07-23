@@ -13,7 +13,8 @@ function toDoAdd() {
         inputBox.value = "";
         const obj = {};
         obj.id = task_Id_Last++;
-        obj.text = inputText
+        obj.text = inputText;
+        obj.state=false;
         listForTask.push(obj);
 
         toDoRender();
@@ -34,6 +35,8 @@ function toDoRender() {
         li.innerHTML = `<span>${item.text}</span>`;
         li.innerHTML += "<span class='delete_item'>❌</span>";
         li.innerHTML += "<span class='edit_item'>✏️</span>"
+        
+        li.innerHTML += `<input class='check_item' type='checkbox' ${item.state?"checked":null}/>`
         li.classList += "Tasks";
         li.id = item.id;
         ul.appendChild(li);
@@ -58,7 +61,7 @@ function changevalue(value,item){
 function toDoEdit(item) {
     for(let i of listForTask){
         if(item.closest("li").id==i.id){
-            console.log(item.closest('li').querySelector('span'))
+           
             const cuurenttext= (item.closest("li").querySelector("span")).innerText;
             
             item.closest("li").innerHTML=`<input type="text" onchange="changevalue(this.value,this)" value="${cuurenttext}" autofocus >`;
@@ -76,8 +79,14 @@ function toDoDelete(item) {
     toDoRender();
 
 }
-function toDoCheck() {
-
+function toDoCheck(value) {
+    for(let i of listForTask ){
+        if(value.closest("li").id==i.id){
+            i.state= value.checked;
+            
+        }
+    }
+    toDoSave();
 }
 function toDoSave() {
     localStorage.setItem("list", JSON.stringify(listForTask));
@@ -102,6 +111,10 @@ container.addEventListener("click", (e) => {
     if ((e.target.classList).contains("edit_item")){
         
         toDoEdit(e.target);
+    }
+    if (e.target.type=="checkbox"){
+        
+        toDoCheck(e.target);
     }
 
 })
